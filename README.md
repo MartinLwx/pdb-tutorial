@@ -36,7 +36,7 @@ python --version
 git clone https://github.com/spiside/pdb-tutorial
 ```
 
-**注意：**如果这个命令报错克隆失败的话，你应该看看 Github 的[克隆教程](https://help.github.com/articles/cloning-a-repository/)
+**注意**：如果这个命令报错克隆失败的话，你应该看看 Github 的[克隆教程](https://help.github.com/articles/cloning-a-repository/)
 
 
 
@@ -192,11 +192,11 @@ What are you doing with your life.
 
 
 
-**注意：**我和其他程序员们一样，不建议使用短的变量名，比如 `a`，`b`，`gme`等。这些短变量名没有含义还会让其他人在阅读你的代码的时候感到很困惑。我只是在这里向你们展示你们在 `pdb` 中使用短变量名的时候可能会遇到的问题。
+**注意**：我和其他程序员们一样，不建议使用短的变量名，比如 `a`，`b`，`gme`等。这些短变量名没有含义还会让其他人在阅读你的代码的时候感到很困惑。我只是在这里向你们展示你们在 `pdb` 中使用短变量名的时候可能会遇到的问题。
 
 
 
-**再次注意：**另外一个有用的命令是 `h(elp) - 不给参数的话，会输出可使用的所有命令。如果提供了命令作为参数，就会输出命令的帮助手册`。这篇教程接下来的部分，我会使用短命令，如果我用到了一个我没有介绍过的命令，我会解释它的功能是什么。那么，让我们开始学习第一个命令吧。
+**再次注意**：另外一个有用的命令是 `h(elp) - 不给参数的话，会输出可使用的所有命令。如果提供了命令作为参数，就会输出命令的帮助手册`。这篇教程接下来的部分，我会使用短命令，如果我用到了一个我没有介绍过的命令，我会解释它的功能是什么。那么，让我们开始学习第一个命令吧。
 
 ### 1. `l(ist)` 又叫做： 我懒得打开包含源代码的文件
 
@@ -207,17 +207,17 @@ l(ist) [first [,last]]
     With two arguments, list the given range; if the second argument is less than the first, it is a count.
 ```
 
-**注意：**上面的命令描述是调用 `help list` 生成的。如果要得到一样的输出，你可以在 `pdb` 中输入 `help l`。我们可以使用 `list` 命令来检查我们所在的行的源代码。`list` 命令的参数让你可以指定要查看的行的范围，这在你用来查看第三方库的时候很有用（往往代码会很长）。
+**注意**：上面的命令描述是调用 `help list` 生成的。如果要得到一样的输出，你可以在 `pdb` 中输入 `help l`。我们可以使用 `list` 命令来检查我们所在的行的源代码。`list` 命令的参数让你可以指定要查看的行的范围，这在你用来查看第三方库的时候很有用（往往代码会很长）。
 
 
 
-**注意：**在大于等于 Python 3.2 的版本中，你可以通过输入 `ll`（更长的输出）来看当前函数或者是堆栈帧的源代码。我基本都是使用这个而不是 `l` 命令，因为它相比于展示当前位置附近的 11 行来说，你可以更直观知道你当前处在哪个函数里。
+**注意**：在大于等于 Python 3.2 的版本中，你可以通过输入 `ll`（更长的输出）来看当前函数或者是堆栈帧的源代码。我基本都是使用这个而不是 `l` 命令，因为它相比于展示当前位置附近的 11 行来说，你可以更直观知道你当前处在哪个函数里。
 
 
 
 现在让我们尝试使用 `l` 命令。在你已经打开的 `pdb` 调试窗口中，输入 `l` 并查看输出：
 
-```
+```python
 (Pdb) l
   4     def main():
   5         print("Add the values of the dice")
@@ -234,7 +234,7 @@ l(ist) [first [,last]]
 
 如果我们想看整个文件，我们可以给 list 命令加上范围参数（1～13），像这样：
 
-```
+```python
 (Pdb) l 1, 13
   1     from dicegame.runner import GameRunner
   2     
@@ -268,7 +268,7 @@ s(tep)
 
 让我们来调用 `step` 命令看看会发生什么。
 
-```
+```python
 (Pdb) s
 --Call--
 > /Users/Development/pdb-tutorial/dicegame/runner.py(21)run()
@@ -279,7 +279,7 @@ s(tep)
 
 问题是，我们没有太多的上下文信息，所以让我们来运行 `list` 命令来检查这个方法。
 
-```
+```python
 (Pdb) l
  16             total = 0
  17             for die in self.dice:
@@ -296,7 +296,7 @@ s(tep)
 
 哇哦！现在我们有了 `run()` 方法的更多上下文信息。但我们现在还在 `:21` 行。让我们再次执行 `step` 命令来进入到这个方法内部，然后用 `list` 命令查看我们当前的位置。
 
-```
+```python
 (Pdb) s
 > /Users/Development/pdb-tutorial/dicegame/runner.py(25)run()
 -> c = 0
@@ -328,9 +328,9 @@ n(ext)
 
 
 
-**译者注：**在我用的 Python 3.8.10 上，此时我停留在了 `runner = cls()` 这一行
+**译者注**：在我用的 Python 3.8.10 上，此时我停留在了 `runner = cls()` 这一行
 
-```
+```python
 (Pdb) n
 > /Users/Development/pdb-tutorial/dicegame/runner.py(27)run()
 -> while True:
@@ -352,9 +352,9 @@ n(ext)
 
 
 
-**译者注：**因为之前直接跳到了 `runner = cls()` 这一行，所以在这里我只要调用 2 次 `next` 就到了 `for` 语句
+**译者注**：因为之前直接跳到了 `runner = cls()` 这一行，所以在这里我只要调用 2 次 `next` 就到了 `for` 语句
 
-```
+```python
 (Pdb) n
 > /Users/Development/pdb-tutorial/dicegame/runner.py(27)run()
 -> runner = cls()
@@ -381,7 +381,7 @@ Round 1
 
 如果你继续输入 `next` 命令，你会遍历完这个 `for` 循环，遍历的长度等于 `runner.dice` 的长度。我们可以在 `pdb` 中用 `len` 方法来看看 `runner.dice` 的长度，应该会返回 5。
 
-```
+```python
 (Pdb) len(runner.dice)
 5
 ```
@@ -410,7 +410,7 @@ b(reak) [ ([filename:]lineno | function) [, condition] ]
 
 在这篇教程中，我们只需要看 `b(reak)` 命令描述的前两段。就像我在前面的部分提到的，我们想要通过设置程序断点的方式来执行完 `for` 循环，然后接着看 `run()` 方法的其他部分。因为 `:34` 行有 `input` 函数，程序会暂停并等待用户输入，所以让我们停在 `:34` 行。为了做到这一点，我们可以输入 `b 34` 然后输入 `continue` 来运行到程序断点处。
 
-```
+```python
 (Pdb) b 34
 Breakpoint 1 at /Users/Development/pdb-tutorial/dicegame/runner.py(34)run()
 (Pdb) c
@@ -423,7 +423,7 @@ Breakpoint 1 at /Users/Development/pdb-tutorial/dicegame/runner.py(34)run()
 
 我们也可以通过不带参数调用 `break` 命令来看看我们设置好的程序断点。
 
-```
+```python
 (Pdb) b
 Num Type         Disp Enb   Where
 1   breakpoint   keep yes   at /Users/Development/pdb-tutorial/dicegame/runner.py:34
@@ -434,16 +434,16 @@ Num Type         Disp Enb   Where
 
 
 
-**注意：**如果你没有提供任何参数给 `clear` 命令，那么就会清空所有的程序断点。
+**注意**：如果你没有提供任何参数给 `clear` 命令，那么就会清空所有的程序断点。
 
-```
+```python
 (Pdb) cl 1
 Deleted breakpoint 1 at /Users/Development/pdb-tutorial/dicegame/runner.py:34
 ```
 
 现在我们可以调用 `next` 命令来执行 `input()` 函数。让我们猜测骰子和为 10 并输入我们的猜测，一旦我们回到 `pdb` 中，我们可以调用 `list` 命令来看看接下来的几行。
 
-```
+```python
 (Pdb) n
 Sigh. What is your guess?: 10
 > /Users/Development/pdb-tutorial/dicegame/runner.py(35)run()
@@ -460,14 +460,11 @@ Sigh. What is your guess?: 10
  38                     print("Congrats, you can add like a 5 year old...")
  39                     runner.wins += 1
  40                     c += 1
-
-
-
 ```
 
 记住我们是在尝试找出第一次玩游戏的时候我们猜测的骰子和不对的原因。这看起来似乎是 `guess == runner.answer` 这里的等于判断出了问题。我们应该仔细检查一下看看 `runner.answer()` 这个方法做了什么，以防万一可能会遇到错误。调用一次 `next` 命令然后调用 `step` 命令来*进入*到 `runner.answer()` 方法内部。
 
-```
+```python
 (Pdb) s
 --Call--
 > /Users/spiro/Development/mobify/engineering-meeting/pdb-tutorial/dicegame/runner.py(15)answer()
@@ -488,7 +485,7 @@ Sigh. What is your guess?: 10
 
 我想我找到了问题根源！在第 18 行，它在计算 `total` 的时候看起来不是我们想象的那种骰子的加法。让我们来检查一下 `die` 有没有什么属性等于骰子本身的值看能不能解决这个问题。如果要到第 18 行，你可以通过设置一个程序断点，也可以一直调用 `next` 命令直到你到了循环到第一次迭代。一旦你到了 `:18` 行，让我们对 `die` 实例调用一下 `dir()` 函数看看它有什么属性和方法。
 
-```
+```python
 -> total += 1
 (Pdb) dir(die)
 ['__class__', '__delattr__', [...], 'create_dice', 'roll', 'show', 'value']
@@ -496,14 +493,14 @@ Sigh. What is your guess?: 10
 
 它有一个属性叫做 `value`！让我们调用一下它看看返回了什么（注意，你这里显示的值可能跟我的不同）。同时让我们也调用一下它的 `show()` 方法显示骰子图案，确保显示的结果和它的 `value` 值一样。
 
-```
+```python
 (Pdb) die.value
 2
 (Pdb) die.show()
 '---------\n|*      |\n|       |\n|      *|\n---------'
 ```
 
-**注意：**如果你想要换行符 `\n` 真的有换行的效果，你可以执行 `print(die.show())`。
+**注意**：如果你想要换行符 `\n` 真的有换行的效果，你可以执行 `print(die.show())`。
 
 
 
@@ -518,7 +515,7 @@ r(eturn)
 
 `return` 是一个*强大的用户命令*，让你可以直接检查函数的最后返回的结果。尽管你可以在调用 return 的地方设置一个程序断点，但如果一个函数里有多个 return 语句的话，还是在 pdb 里面使用 `return` 命令会好一些，因为它对一个 return 语句只会遵循一条执行路径。让我们调用一下 `return` 命令到函数的末尾。
 
-```
+```python
 (Pdb) r
 --Return--
 > /Users/Development/pdb-tutorial/dicegame/runner.py(19)answer()->5
@@ -557,7 +554,7 @@ r(eturn)
 
 `! `命令是在告诉 `pdb` 接下来的语句是 Python 命令而不是 `pdb` 命令。在带有变量名为 `c` 的 `run()` 方法中这很有用。就像我在教程一开始说的，直接在 `pdb` 里面输入 `c` 会被认为是要执行 `continue` 指令。进入 `pdb` 调试模式，停在 `runner.py` 的 `:26` 行，然后可以运行 `!c` 看看会发生什么。
 
-```
+```python
 (Pdb) !c
 0
 ```
@@ -583,7 +580,7 @@ pdb.pm()
 
 先打开终端并进入到项目的根目录下，然后输入 `python` 进 python REPL 交互模式。然后，让我们从 `main` 模块里面载入 `main` 方法，同时要载入 `pdb`。接下来玩游戏直到我们在尝试输入 `Y` 继续游戏的时候抛出异常。
 
-```
+```python
 >>> import pdb
 >>> from main import main
 >>> main()
@@ -603,7 +600,7 @@ dicegame.utils.UnnecessaryError: You actually called this function...
 
 现在，让我们从 `pdb` 模块中调用 `pm()` 方法看看会发生什么。
 
-```
+```python
 >>> pdb.pm()
 > /Users/Development/pdb-tutorial/dicegame/utils.py(13)i_just_throw_an_exception()
 -> raise UnnecessaryError("You actually called this function...")
@@ -614,7 +611,7 @@ dicegame.utils.UnnecessaryError: You actually called this function...
 
 
 
-**注意：**你也可以使用 `python -m pdb main.py` 来启动 `main.py` 脚本，然后输入 `continue` 运行程序直到抛出异常，Python 会在没有捕获的异常上自动进入 `post_mortem` 模式。
+**注意**：你也可以使用 `python -m pdb main.py` 来启动 `main.py` 脚本，然后输入 `continue` 运行程序直到抛出异常，Python 会在没有捕获的异常上自动进入 `post_mortem` 模式。
 
 ## 写在最后
 
